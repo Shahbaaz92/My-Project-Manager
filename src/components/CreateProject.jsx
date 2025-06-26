@@ -1,4 +1,5 @@
 // import noProjectsImg from "../assets/no-projects.png";
+import Input from "./Input";
 
 function CreateProject() {
   return (
@@ -12,18 +13,9 @@ function CreateProject() {
         </li>
       </menu>
       <div>
-        <p>
-          <label>Title</label>
-          <input type="text" />
-        </p>
-        <p>
-          <label></label>
-          <input type="text" />
-        </p>
-        <p>
-          <label></label>
-          <input type="text" />
-        </p>
+        <Input label="Title" />
+        <Input label="Description" textarea />
+        <Input label="Due Date" />
       </div>
     </div>
   );
