@@ -8,6 +8,7 @@ function NewTask({ onAdd }) {
   }
   function handleClick() {
     if (enteredTask.trim() === "") {
+      alert("Please enter a valid task.");
       return;
     }
     onAdd(enteredTask);
