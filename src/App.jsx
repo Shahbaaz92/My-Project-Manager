@@ -3,13 +3,38 @@ import { useState } from "react";
 import CreateProject from "./components/CreateProject";
 import ProjectSidebar from "./components/ProjectSidebar";
 import NoProjectSelected from "./components/NoProjectSelected";
-import ProjectList from "./components/ProjectList";
 import SelectedProject from "./components/SelectedProject";
+
 function App() {
   const [projectsState, setProjectState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
+
+  function handleAddTask(text) {
+    setProjectState((prevState) => {
+      const taskId = Math.random();
+      const newTask = {
+        text: text,
+        projectId: prevState.selectedProjectId,
+        id: taskId,
+      };
+
+      return {
+        ...prevState,
+        tasks: [newTask, ...prevState.tasks],
+      };
+    });
+  }
+  function handleDeleteTask(id) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => task.id !== id),
+      };
+    });
+  }
 
   function handleSelectProject(id) {
     setProjectState((prevState) => ({
@@ -62,7 +87,13 @@ function App() {
     (project) => project.id === projectsState.selectedProjectId
   );
   let content = (
-    <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
+    <SelectedProject
+      project={selectedProject}
+      onDelete={handleDeleteProject}
+      onAddTasks={handleAddTask}
+      onDeleteTasks={handleDeleteTask}
+      tasks={projectsState.tasks}
+    />
   );
 
   if (projectsState.selectedProjectId === null) {

@@ -1,6 +1,12 @@
 import Tasks from "./Tasks";
 
-function SelectedProject({ project, onDelete }) {
+function SelectedProject({
+  project,
+  onDelete,
+  onAddTasks,
+  onDeleteTasks,
+  tasks,
+}) {
   const formattedDate = new Date(project.dueDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -15,7 +21,7 @@ function SelectedProject({ project, onDelete }) {
             {project.title}
           </h1>
           <button
-            className="px-6 py-2 rounded-md text-stone-800 hover:text-stone-950 hover:bg-stone-200 cursor-pointer"
+            className="px-6 py-2 rounded-md text-stone-800 hover:text-red-500 hover:bg-stone-200 cursor-pointer"
             onClick={onDelete}
           >
             Delete
@@ -26,7 +32,7 @@ function SelectedProject({ project, onDelete }) {
           {project.description}
         </p>
       </header>
-      <Tasks />
+      <Tasks onAdd={onAddTasks} onDelete={onDeleteTasks} tasks={tasks} />
     </div>
   );
 }
