@@ -46,7 +46,17 @@ function App() {
     });
   }
 
-  function handleDeleteProject() {}
+  function handleDeleteProject() {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.selectedProjectId
+        ),
+      };
+    });
+  }
 
   const selectedProject = projectsState.projects.find(
     (project) => project.id === projectsState.selectedProjectId
